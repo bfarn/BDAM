@@ -1,0 +1,78 @@
+body {
+	font-family: Helvetica, Tahoma, sans-serif;
+	font-size: 10px;
+}
+
+#emojiSelectDiv, #submitBox, #infoBox {
+	border: 1px solid silver;
+	border-radius: 10px;
+	padding: 5px;
+	margin-bottom: 10px;
+}
+
+input#my-search {
+	border-radius: 5px;
+	border: 1px solid silver;
+	padding: 3px;
+}
+
+#publishButton, #dailiesButton {
+	background-color: limegreen;
+	border-radius: 5px;
+	border: 1px solid green;
+	color: white;
+	cursor: pointer;
+	font-size: 20px;
+	padding: 5px;
+	text-align: center;
+}
+
+#publishButton:hover, #dailiesButton:hover {
+	background-color: green;
+}
+
+.hide {
+	display: none;
+}
+
+#outputLabelLabel {
+	margin-top: 20px;
+	margin-bottom: 0;
+}
+
+#outputLabel {
+	margin-top: 5px;
+	font-size: 14px;
+}
+
+#infoText {
+	word-wrap: break-word;
+}
+
+.tf-child-false {
+	border: 1px solid #eee;
+}
+
+.tf-child-false:hover {
+	border: 1px solid #3af;
+}
+
+.openButton {
+	width: 16px;
+	height: 16px;
+	float: right;
+	display: inline-block;
+	background-image: url("./images/blue-folder-network-horizontal-open.png");
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#submitHeader {
+	font-size: 20px;
+}
+
+#versionLabel {
+	margin-top: 3.0em;
+	color: silver;
+	text-align: center;
+}
