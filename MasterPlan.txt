@@ -1,0 +1,30 @@
+In App Management
+
+Major goals:
+-Asset Library
+-Templates
+-File Management (Automagically name files and save in the correct place)
+-Publish to Dailies and Slack
+
+Major Tasks:
+-Define interaction
+	-Poll Joe and others for feature requests
+	-Wireframe interface
+	-Iterate and get approval
+
+-Learning, Research, and Setup
+	-Github
+		-Install, get account set up by Albert
+		-Branch
+		-Learn how to commit, pull, push, etc.
+	-Get on dev Slack channel
+	-Set up working dirs on the server
+	-Get Eclipse up and running? Possibly...
+	-Adobe Extension Dev
+		-Lots of setup involved in getting an extension to run at all
+		-Manifest files and code signing
+		-Learn how to navigate file system
+		-Learn how to generate thumbnails
+	-Environment Variables and persistent data
+		-What do I get from BuckLauncher?
+		-Where, if anywhere, do I store persistent data?
