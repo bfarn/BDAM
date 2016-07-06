@@ -12,6 +12,7 @@ Major Tasks:
 -Define the actual task
 	-Poll Joe and others for feature requests
 	-Explore existing solutions (Shotgun, etc)
+	-Identify low hanging fruits
 	-Develop idealized workflow for artists
 		-Think through several past projects worth of scenarios
 		-With no tools but everyone following procedure, what would work?
