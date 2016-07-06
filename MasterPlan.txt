@@ -1,25 +1,37 @@
 In App Management
 
 Major goals:
--Asset Library
--Templates
--File Management (Automagically name files and save in the correct place)
+-Review system for directors
+-File Management
+	-Automagically name files and save in the correct place
+	-Establish the rules for either artists or scripts to follow
+-Asset Library / Template Library
 -Publish to Dailies and Slack
 
 Major Tasks:
--Define interaction
+-Define the actual task
 	-Poll Joe and others for feature requests
-	-Wireframe interface
-	-Iterate and get approval
+	-Explore existing solutions (Shotgun, etc)
+	-Develop idealized workflow for artists
+		-Think through several past projects worth of scenarios
+		-With no tools but everyone following procedure, what would work?
+			-Then build tools to help make that easier
+		-Has to work for design phase and production phase
+	-Build the simple tools in house
+		-Wireframe interface
+		-Iterate and get approval
+		-Build
+		-Integrate into existing tools (or not)
+		-Test
+		-Integrate into Josh's workflow to deploy
 
 -Learning, Research, and Setup
 	-Github
 		-Install, get account set up by Albert
 		-Branch
-		-Learn how to commit, pull, push, etc.
+		-Learn best practices for commit, pull, push, etc.
 	-Get on dev Slack channel
 	-Set up working dirs on the server
-	-Get Eclipse up and running? Possibly...
 	-Adobe Extension Dev
 		-Lots of setup involved in getting an extension to run at all
 		-Manifest files and code signing
@@ -28,3 +40,5 @@ Major Tasks:
 	-Environment Variables and persistent data
 		-What do I get from BuckLauncher?
 		-Where, if anywhere, do I store persistent data?
+	-How to deploy once tools are built?
+		-Work with Josh and Journey on this
