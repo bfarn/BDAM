@@ -1,2 +1,2 @@
-# PSJobBrowser
-Buck Photoshop In App Management
+# BDAMN
+Buck Digital Asset Management
