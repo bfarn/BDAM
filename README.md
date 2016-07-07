@@ -1,2 +1,2 @@
-# BDAMN
+# BDAM
 Buck Digital Asset Management
