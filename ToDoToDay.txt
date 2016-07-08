@@ -8,3 +8,15 @@ Today 07/06/16:
   -A few collection-centric options (Tools for directors to be able to thumbnail and review files from multiple locations)
   -A few just-build-the-directories-right options
 -Develop the Template Browser or perhaps a Buck Save, Buck New, Buck Open, Buck Submit bar
+
+
+Today 07/08/16:
+-Use environment variables to build a list of current projects
+	-Filter out unwanted directories
+-Use that list to build a dropdown menu
+-Use environemnt variables to choose the correct project from that list
+-Scan the correct directory for templates
+	-Filter out unwanted files
+-Changing projects in the dropdown menu rescans the correct dir
+-Build a scrollable list of collected files
+-Clicking on a filename opens a duplicate of that file

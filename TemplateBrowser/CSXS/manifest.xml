@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<ExtensionManifest ExtensionBundleId="com.buck.templatebrowser" ExtensionBundleName="Template Browser" ExtensionBundleVersion="1.0" Version="6.0">
+<ExtensionManifest ExtensionBundleId="com.buck.templateBrowser" ExtensionBundleName="Template Browser" ExtensionBundleVersion="1.0" Version="6.0">
   <ExtensionList>
-    <Extension Id="com.buck.templatebrowser.extension" Version="1.0"/>
+    <Extension Id="com.buck.templateBrowser.extension" Version="1.0"/>
   </ExtensionList>
   <ExecutionEnvironment>
     <HostList>
-      <Host Name="PHXS" Version="[14.0,16.9]"/>
+      <Host Name="PHSP" Version="[16.0,16.9]" />
+	  <Host Name="PHXS" Version="[16.0,16.9]" />
     </HostList>
     <LocaleList>
       <Locale Code="All"/>
@@ -15,10 +16,13 @@
     </RequiredRuntimeList>
   </ExecutionEnvironment>
   <DispatchInfoList>
-    <Extension Id="com.buck.templatebrowser.extension">
+    <Extension Id="com.buck.templateBrowser.extension">
       <DispatchInfo>
         <Resources>
           <MainPath>./index.html</MainPath>
+		  <CEFCommandLine>
+				<Parameter>--enable-nodejs</Parameter>
+			</CEFCommandLine>
         </Resources>
         <UI>
           <Type>Panel</Type>
@@ -33,8 +37,8 @@
 				<Width>1200</Width>
 			</MaxSize>
 			<MinSize>
-				<Height>400</Height>
-				<Width>400</Width>
+				<Height>100</Height>
+				<Width>100</Width>
 			</MinSize>
           </Geometry>
         </UI>
