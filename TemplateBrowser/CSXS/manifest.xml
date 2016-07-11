@@ -29,8 +29,8 @@
           <Menu>Template Browser</Menu>
           <Geometry>
             <Size>
-              <Height>400</Height>
-              <Width>400</Width>
+              <Height>300</Height>
+              <Width>350</Width>
             </Size>
 			<MaxSize>
 				<Height>800</Height>
