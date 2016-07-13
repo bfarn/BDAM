@@ -11,12 +11,14 @@ var isWin = /^win/.test(process.platform);
 var workRoot = process.env.BUCK_WORK_ROOT;
 var currentProject = process.env.BUCK_PROJECT;
 var activeProjectIndex = 0;
-var templateRoot = workRoot + "\\" + currentProject + "\\Ref\\templates";
+var projectTemplateRoot = workRoot + "/" + currentProject + "/Ref/templates";
+var studioTemplateRoot = "//abadal/GlobalPrefs/work.david/templates";
+
 if(!isWin) { 
 	workRoot = "/Volumes/Work/current";
-	templateRoot = workRoot + "/" + currentProject + "/Ref/templates";
+	projectTemplateRoot = workRoot + "/" + currentProject + "/Ref/templates";
 }
-console.log(templateRoot);
+//console.log(projectTemplateRoot);
 
 
 
@@ -59,16 +61,24 @@ function buildPanel() {
 	projectBox.append(hRule);
 	
 	//Build the template list interface
-	var templateBox = $(document.createElement("div")).attr("id", "templateBox");
-	body.append(templateBox);
+	var projectTemplateBox = $(document.createElement("div")).attr("id", "projectTemplateBox");
+	body.append(projectTemplateBox);
 	var templateHeading = $(document.createElement("p")).attr("id", "templateHeading");
-	templateHeading.text("Available Templates:");
-	templateBox.append(templateHeading);
 	
-	//Build template list
-	templateBox.append(buildTemplateList());
+	//Build project template list
+	templateHeading.text("Project Specific Templates:");
+	projectTemplateBox.append(templateHeading);
+	projectTemplateBox.append(buildTemplateList("project"));
+	var hRule = $(document.createElement("hr"));
+	projectTemplateBox.append(hRule);
 	
-	
+	//Build studo template list
+	var templateHeading = $(document.createElement("p")).attr("id", "templateHeading");
+	templateHeading.text("Studio Templates:");
+	projectTemplateBox.append(templateHeading);
+	projectTemplateBox.append(buildTemplateList("studio"));
+	var hRule = $(document.createElement("hr"));
+	projectTemplateBox.append(hRule);
 	
 	console.log("Panel built");
 }
@@ -76,6 +86,7 @@ function buildPanel() {
 
 function buildProjectDropdown(projectSelector) {
 	var projectSelectorDropdown = $(document.createElement("select")).attr("id", "projectSelectorDropdown");
+	projectSelectorDropdown.attr("onchange", "reloadPanel()");
 	projectSelector.append(projectSelectorDropdown);
 	
 	//Scan dir structure for job folders
@@ -117,13 +128,17 @@ function buildProjectList() {
 	return activeProjects;
 }
 
-function buildTemplateList() {
+function buildTemplateList(projectVsStudio) {
 	//Initialize blank Unordered List
 	var templateList = $(document.createElement("ul")).attr("id", "templateList");
 	
+	var rootDir = studioTemplateRoot;
+	if (projectVsStudio == "project") rootDir = projectTemplateRoot;
+	console.log("root dir: " + rootDir);
+	
 	//Populate list with filtered dir contents
 	var templateDirContents = [];
-	if(!fs.existsSync(templateRoot)){
+	if(!fs.existsSync(rootDir)){
 		console.log("No templates found!");
 		var listItem = $(document.createElement("li")).attr("class", "templateListItems");
 		listItem.append("No templates found");
@@ -131,7 +146,7 @@ function buildTemplateList() {
 		return templateList;
 	}
 	
-	var cleanTemplateDirContents = cleanArray(fs.readdirSync(templateRoot), ignoreFilesList);
+	var cleanTemplateDirContents = cleanArray(fs.readdirSync(rootDir), ignoreFilesList);
 	
 	for(var i=0; i < cleanTemplateDirContents.length; i++){
 		//Create empty list item
@@ -139,16 +154,16 @@ function buildTemplateList() {
 		
 		//Create empty link to add to list item
 		var clickableListItem = $(document.createElement("a")).attr("class", "templateListItems");
+		clickableListItem.attr("href", "#");
 		
 		//Add template name to link
 		clickableListItem.text(cleanTemplateDirContents[i]);
 		
 		//Add file path to link
-		//clickableListItem.attr("filePath", (templateRoot + "\\" + cleanTemplateDirContents[i] ));
-		var tempFilePath = templateRoot + "/" + cleanTemplateDirContents[i];
-		tempFilePath = slash(tempFilePath);
-		var onClickScript = "openTest('" + tempFilePath + "')";
-		console.log(onClickScript);
+		var templatePath = rootDir + "/" + cleanTemplateDirContents[i];
+		templatePath = slash(templatePath);
+		var onClickScript = "openTemplateFile('" + templatePath + "')";
+		//console.log(onClickScript);
 		clickableListItem.attr("onclick", onClickScript);
 		
 		//Add link to list item
@@ -161,7 +176,7 @@ function buildTemplateList() {
 }
 
 function slash(str) {
-	console.log("slash(" + str + ")");
+	//console.log("slash(" + str + ")");
 	var isExtendedLengthPath = /^\\\\\?\\/.test(str);
 	var hasNonAscii = /[^\x00-\x80]+/.test(str);
 	if (isExtendedLengthPath || hasNonAscii) {
@@ -177,15 +192,28 @@ function onLoaded() {
 	csInterface = new CSInterface();
 	buildPanel();
 	console.log("Template Browser ready");
+	console.log("----------------------------");
 }
 
-function openTest(openPath) {
-	console.log("Opening a template");
-	openScript = "tempFilePath = '" + openPath + "'; tempFile = new File(tempFilePath); app.open(tempFile);"
-	console.log(openScript);
-	csInterface.evalScript(openScript);
-	dupeScript = "var templateSource = app.activeDocument; templateSource.duplicate(); templateSource.close(SaveOptions.DONOTSAVECHANGES);"
-	console.log(openScript);
-	csInterface.evalScript(dupeScript);
+function reloadPanel() {
+	var currentIndex = document.getElementById("projectSelectorDropdown").selectedIndex;
+	currentProject = document.getElementById("projectSelectorDropdown").options[currentIndex].value;
+	projectTemplateRoot = workRoot + "/" + currentProject + "/Ref/templates";
+
+	$(document.getElementById("projectBox").remove());
+	$(document.getElementById("projectTemplateBox").remove());
+	buildPanel();
 	
+	console.log("Template Browser reloaded");
+	console.log("----------------------------");
+}
+
+function openTemplateFile(openPath) {
+	console.log("Opening a template");
+	openScript = "templatePath = '" + openPath + "'; tempFile = new File(templatePath); app.open(tempFile);"
+	//console.log(openScript);
+	csInterface.evalScript(openScript);
+	dupeScript = "var templateSource = app.activeDocument; templateSource.duplicate(templateSource.name); templateSource.close(SaveOptions.DONOTSAVECHANGES);"
+	//console.log(openScript);
+	csInterface.evalScript(dupeScript);
 }

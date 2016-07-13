@@ -35,3 +35,12 @@ body {
 .templateListItems {
 	margin: 5px;
 }
+
+a:link {
+	color: #DDDDDD;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #FFFFFF;
+}
